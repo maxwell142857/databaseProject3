@@ -1,4 +1,6 @@
-# Library management system
+# Library System
+
+A simple system allows users to manage the books' information and their copies
 
 
 ## FrontEnd
@@ -22,7 +24,7 @@ Node + Express
 
 ## Database
 
-Sqlite
+Sqlite + Redis
 
 ## Usage
 

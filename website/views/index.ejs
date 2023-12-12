@@ -1,83 +1,79 @@
 <!doctype html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Find books and their copies</title>
+    <%- include('./partials/css.ejs') %>
   </head>
   <body>
-    <!-- <h1><%= title %></h1> -->
+    <div class="container">
+      <%- include("./partials/navBar.ejs") %>
+      <h1>Find books and their copies</h1>
 
-    <div class="left">
-      <% books.forEach(function(books,index){ %>
-        <div >
-          <div>
-            <label>Book ID: <output><%= books.titleID %></output> </label>
+      <%- include("./partials/errMsg.ejs") %>
+
+      <div class="mb-4">
+        <a href="/titles/create" class="btn btn-primary btn-sm">Add a Book</a>
+      </div>
+      <div class="row">
+  
+
+        <% titles.forEach(function(title){ %>
+        <div class="col-4 mb-2">
+          <div class="card p-2">
+            <div class="card-title">
+              <label>Book ID: <output><%= title.titleID %></output></a> </label>
+            </div>
+            <div class="card-text">
+              <div>
+                <label
+                  >Title: <output><%= title.title %> </output>
+                </label>
+              </div>
+              <div>
+                <label
+                  >Author: <output><%= title.author%></output>
+                </label>
+              </div>
+              <div>
+                <label
+                  >Genre: <output><%= title.genre %></output>
+                </label>
+              </div>
+
+              <div>
+                <a
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  href="/titles/<%= title.titleID %>/copies"
+                  >View copies</a
+                >
+                <a
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  href="/titles/<%= title.titleID %>/edit"
+                  >Edit</a
+                >
+                <a
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  href="/titles/<%= title.titleID %>/delete"
+                  >Delete</a
+                >
+                
+              </div>
+            </div>
+            <!-- /.card-text -->
           </div>
-          <div>
-            <label>Name: <output> 《<%= books.title %>》</output> </label>
-          </div>
-          <button class="action-button" data-id="<%= books.titleID %>">点击我</button>
+          <!-- /.card -->
         </div>
-        <hr />
-        <% }); %>
-    </div>
+        <!-- /.col-4 -->
 
-    <div class="right">
-      <% copys.forEach(function(copys){ %>
-        <div >
-          <div>
-            <label>Copy ID: <output><%= copys.copyID %>, Book ID: <output><%= copys.titleID %></output></output> </label>
-          </div>
-          <div>
-            <label>Location: <output><%= copys.location %></output> </label>
-          </div>
-          <div>
-            <label>Available: <output><%= copys.isCheckedOut==0 %></output> </label>
-          </div>
-        </div>
-        <hr />
         <% }); %>
-    </div>
-    
+      </div>
+      <!-- /.row -->
 
-    <!-- <footer>
-      <div>Made by John with 💪🏼</div>
-    </footer> -->
+      <%- include("./partials/footer.ejs") %>
+    </div>
+    <!-- /.container -->
   </body>
 </html>
-
-<style>
-
-  .left {
-  float: left;
-  width: 40%; 
-  height: 400px; 
-  overflow: auto;
-  border: 4px solid #3498db;
-  padding: 20px;
-}
-
-.right {
-  float: right;
-  width: 40%; 
-  height: 400px; 
-  overflow: auto;
-  border: 4px solid #3498db;
-  padding: 20px;
-}
-
-</style>
-
-<script src="../db/dbConnector_Sqlite.js">
-
-const leftContainer = document.querySelector(".left");
-leftContainer.addEventListener("click", function (event) {
-  if (event.target.classList.contains("action-button")) {
-    const bookId = event.target.getAttribute("data-id");
-    deleteBook(bookId)
-    alert(`Book ID: ${bookId}`);
-  }
-  });
-
-
-</script>

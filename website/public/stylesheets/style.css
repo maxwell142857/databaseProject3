@@ -6,12 +6,3 @@ body {
 a {
   color: #00B7FF;
 }
-
-left {
-  float: left;
-  width: 30%;
-}
-right {
-  float: right;
-  width: 70%;
-}
